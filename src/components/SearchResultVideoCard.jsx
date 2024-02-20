@@ -25,6 +25,7 @@ const SearchResultVideoCard = ({ video }) => {
             src={video?.thumbnails?.[0]?.url}
             alt="Thumbnail"
           />
+          {/* condition for videos that do not provide time in seconds, we should not display the time on the thumbnail.l*/}
           {!isHovered && !isVideoPlaying && (
             <VideoLength time={video?.lengthSeconds} />
           )}
@@ -40,8 +41,7 @@ const SearchResultVideoCard = ({ video }) => {
               className="absolute top-0 left-0"
             />
           )}
-          {/* condition for some video not provide time,sec in that case 
-          we have to not print time on thumbnail*/}
+          
         </div>
         <div className="flex flex-col ml-4 md:ml-6 mt-4 md:mt-0 overflow-hidden">
           <span className="text-lg md:text-2xl font-semibold line-clamp-2 text-white">
@@ -74,10 +74,7 @@ const SearchResultVideoCard = ({ video }) => {
                   video?.stats?.views ?? video?.stats?.viewers,
                   2
                 )} views`}</span>
-                {/* ?? is nullish coalescing operator return left hand operand
-              if it not "null" or "undefined" otherwise it return right operand.
-              If video?.stats?.views is "null" or "undefined" it print
-              video?.stats?.viewers and vice versa. Simply it handle either or case */}
+                {/* The nullish coalescing operator (??) returns the right-hand operand when the left-hand operand is null or undefined; otherwise, it returns the left-hand operand. If video?.stats?.views is null or undefined, it prints video?.stats?.viewers; otherwise, it prints video?.stats?.views. In other words, it handles either case. */}
                 <span className="flex text-[24px] leading-none font-bold text-white/[0.7] relative top-[-10px] mx-1">
                   .
                 </span>

@@ -17,55 +17,42 @@ const Header = () => {
   const [searchQuery, setSearchQuery] = useState("");
 
   const { loading, mobileMenu, setMobileMenu } = useContext(Context);
-  // Context is hook(createContext) in contextApi which we export as const Context
-  // Because of that we can use all the values which we pass from contextApi.js
-
-  // To hadle search query which we type in input field. When we search then
-  // this method will call.
 
   const navigate = useNavigate();
-  // To use useNavigate we have to asign in const. We can give any name here we
-  // give navigate.
+
 
   const searchQueryHandler = (event) => {
-    // Here we targeting enter, after type text in textbox we press enter.
-    // We want to call api when press enter and when click button
+    // This code listens for the 'Enter' key press event after typing text in the textbox.
+    // It calls an API when 'Enter' is pressed or when the button is clicked.
     if (
       (event?.key === "Enter" || event === "searchButton") &&
       searchQuery?.length > 0
     ) {
       navigate(`/searchResult/${searchQuery}`);
-      // When we search anything in search box ex songs then in url there is like
-      // "/searchResult/songs" so, searchResult and then query which we search
-      // we make state to save what search search/typed.
+
     }
-    // ? is for optional chaining if in event there is undefined,null or any falsy value
-    // if we not add optional chaining the in future it will execute key and because
-    // of that our app will crash. So optional chaining is for safety purpose.
-    // If there is falsy value then because of ? further code will not execute.
+   // The optional chaining operator (?.) is used to safely access properties of an object.
+  // It guards against errors that can occur when trying to access a property of an undefined, null, or other falsy value.
+  // If the property is not present or is falsy, the expression short-circuits and further code is not executed.
+  // This helps prevent crashes in our application by ensuring that accessing the property will not throw an error.
   };
 
-  // To handle left category section in mobile view. It will not visible by default
-  // It will visible only click mobile menu icon
   const mobileMenuToggle = () => {
-    // ! for if mobileMenu is true then it will become false and vice verca.
     setMobileMenu(!mobileMenu);
   };
 
   const { pathname } = useLocation();
   const pageName = pathname?.split("/")?.filter(Boolean)?.[0];
-  // To extract first item of given array.
-  // pageName to target page, on which page we are.
-  //  filter(Boolean) part is used to remove any empty strings from the resulting array. This is done by passing
-  // Boolean as the filter function, which will evaluate each element in the array as a boolean value. Since
-  // empty strings ("") are falsy values, they will be removed.
+  // To extract the first item of the given array.
+// `pageName` indicates the target page we are currently on.
+  //  `filter(Boolean)` removes empty strings from the array.
 
   return (
     <div className="sticky top-0 z-10 flex flex-row items-center justify-between h-14 px-4 md:px-5 bg-white dark:bg-black">
-      {/* When loading is true then show loader component */}
+      {/* Show the loader component when loading is true */}
       {loading && <Loader />}
       <div className="flex h-5 items-center">
-        {/* If pageName not equals to video only then render following html/icons. */}
+        {/* If pageName is not equal to "video", then render the following HTML/icons. */}
         {pageName !== "video" && (
           <div
             className="flex md:hidden md:mr-6 cursor-pointer items-center justify-center h-10 w-10 rounded-full hover:bg-[#303030]/[0.6]"
@@ -77,12 +64,11 @@ const Header = () => {
             ) : (
               <SlMenu className="text-white text-xl" />
             )}
-            {/* if mobileMenu state true then icon will be CgClose else SlMenu */}
+
           </div>
         )}
-        {/* This <Link> tag we import from "react-router-dom" it is basically
-        like anchor tag. When we click on this link tag then it redirect to
-        provided url we pass / means homepage url*/}
+        {/* The <Link> component from "react-router-dom" is similar to an anchor tag. 
+        When clicked, it redirects to the specified URL, where "/" represents the homepage URL.*/}
         <Link to="/" className="flex h-5 items-center">
           <img
             className="h-full hidden dark:md:block"
@@ -90,7 +76,7 @@ const Header = () => {
             alt="YouTube"
           />
           <img className="h-full md:hidden" src={ytLogoMobile} alt="YouTube" />
-          {/* In medium screen it will hidden and logo will be ytLogoMobile */}
+          
         </Link>
       </div>
 
@@ -109,7 +95,7 @@ const Header = () => {
             placeholder="Search"
             value={searchQuery}
           />
-          {/* Default value is searchQuery which is state */}
+   
         </div>
         <button
           className="w-[40px] md:w-[60px] h-8 md:h-10 flex items-center justify-center border border-l-0 border-[#303030] rounded-r-3xl bg-white/[0.1]"

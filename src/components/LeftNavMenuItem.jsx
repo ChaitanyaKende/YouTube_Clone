@@ -3,9 +3,7 @@ import uuid from "react-uuid";
 
 const LeftNavMenuItem = ({ text, icon, className, action }) => {
   return (
-    // We apply class which we send from LeftNav as a prop by conditionaly.
-    // If selectedCategory===item.name then we get bg-white/[0.15] else empty string
-    // with added classes.
+   
     <div
       key={uuid()}
       className={

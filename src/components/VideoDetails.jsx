@@ -38,7 +38,7 @@ const VideoDetails = () => {
 
   const fetchRelatedVideos = () => {
     setLoading(true);
-    // Here we have to add end point related-contents.
+    // Here we have to add an endpoint for fetching related contents.
     fetchDataFromApi(`video/related-contents/?id=${id}`).then((res) => {
       console.log(res);
       //Now we have to send this res to setRelatedVideos state.

@@ -12,7 +12,7 @@ const SuggestionVideoCard = ({ video }) => {
   const videoUrl = `https://www.youtube.com/watch?v=${video?.videoId}`;
 
   return (
-    // Because of this link we got to videoDetails page.
+    // This link navigates to the videoDetails page.
     <Link
       to={`/video/${video?.videoId}`}
       onMouseEnter={() => setIsPlaying(true)}
@@ -25,8 +25,7 @@ const SuggestionVideoCard = ({ video }) => {
             src={video?.thumbnails?.[0]?.url}
             alt="Thumbnails"
           />
-          {/* condition for some video not provide time,sec in that case 
-          we have to not print time on thumbnail*/}
+          {/* Condition: If a video does not provide time in seconds, do not print the time on the thumbnail.*/}
           {video?.lengthSeconds && <VideoLength time={video?.lengthSeconds} />}
           {isPlaying && (
             <div className="absolute top-0 left-0 w-full h-full">
@@ -56,10 +55,7 @@ const SuggestionVideoCard = ({ video }) => {
               video?.stats?.views ?? video?.stats?.viewers,
               2
             )} views`}</span>
-            {/* ?? is nullish coalescing operator return left hand operand
-              if it not "null" or "undefined" otherwise it return right operand.
-              If video?.stats?.views is "null" or "undefined" it print
-              video?.stats?.viewers and vice versa. Simply it handle either or case */}
+          
             <span className="flex text-[24px] leading-none font-bold text-white/[0.7] relative top-[-10px] mx-1">
               .
             </span>
